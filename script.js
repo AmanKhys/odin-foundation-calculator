@@ -6,8 +6,46 @@ function divide(a,b){
     return a/b;
 }
 
-// make buttons for inputs 
+const container = document.createElement('div');
+container.classList.add("container-style");
+const screen = document.createElement('div');
+screen.classList.add("screen-style");
+const inputBody = document.createElement('div');
+inputBody.classList.add("inputBody-style");
+
+document.body.appendChild(container);
+container.appendChild(screen);
+container.appendChild(inputBody);
+const operators = ['+','-','*','/','=','clear'];
+ for(let i=0; i<4; i++){
+    const buttonRow = document.createElement('div');
+    buttonRow.classList.add('button-row-style');
+    for(let j=0;j<4;j++){
+        const button = document.createElement('button');
+        button.classList.add('button-style');
+        if((i<3 && j<3) || (i==2 && j==2)){
+            const id = i*3 + j+1;
+            button.setAttribute('id',`${id}`);
+            button.innerText = `${id}`;
+        }
+        else if(i==2 && j==3){
+            const id = 0;
+            button.setAttribute('id',`${id}`);
+            button.innerText = `${id}`;   
+        }else{
+            const operator = operators.shift();
+            button.setAttribute('id',`${operator}`);
+            button.innerText = `${operator}`;
+        }
+
+        buttonRow.appendChild(button);
+    }
+    inputBody.appendChild(buttonRow);
+ }
+//DONE.. make buttons for inputs 
 // - js and plain html...as comfortable to write
+
+
 // use eventlisteners and read values
 // pass it to functions and update on screen
 // store the result in some variable
