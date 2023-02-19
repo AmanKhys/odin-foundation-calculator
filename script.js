@@ -45,13 +45,35 @@ const operators = ['+','-','*','/','=','clear'];
  }
 //DONE.. make buttons for inputs 
 // - js and plain html...as comfortable to write
-
+let prev_value = "";
+let op_counter = 0;
 function updateScreen(e){
     const button = e.target;
-    const value = button.id;
-    console.log(value);
-    screen.innerText += `${value}`;
-
+    let value = button.id;
+    if(value == "clear") screen.innerText = "";
+    let text = screen.innerText; //one character less than actual innerText since it is updated later
+    const valueLength = value.length;
+    const textLength = text.length;
+    prev_value = text.slice(textLength-3,2);
+    console.log(`prev value is ${prev_value}`)
+    console.log(`text is ${text}`)
+    console.log(` value is ${value}`);
+    console.log(`opC is ${op_counter}`)
+    if(value != "clear") 
+        screen.innerText += `${value}`;
+    if(op_counter>0){
+        const newText = text.slice(0,(textLength - valueLength - 1));
+        console.log(`new text ${newText}`)
+        screen.innerText = newText;
+        op_counter--;
+    }
+    for(op in operators){
+        if(prev_value == op && prev_value == value){
+            op_counter++;
+        }
+    }
+    prev_value = value;
+    console.log(`prev value is ${prev_value}`)
 
 }
 // use eventlisteners and read values
