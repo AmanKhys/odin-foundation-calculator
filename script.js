@@ -39,13 +39,21 @@ const operators = ['+','-','*','/','=','clear'];
         }
 
         buttonRow.appendChild(button);
+        button.addEventListener('click',(e)=>updateScreen(e));
     }
     inputBody.appendChild(buttonRow);
  }
 //DONE.. make buttons for inputs 
 // - js and plain html...as comfortable to write
 
+function updateScreen(e){
+    const button = e.target;
+    const value = button.id;
+    console.log(value);
+    screen.innerText += `${value}`;
 
+
+}
 // use eventlisteners and read values
 // pass it to functions and update on screen
 // store the result in some variable

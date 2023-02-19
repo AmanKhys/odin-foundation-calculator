@@ -5,8 +5,8 @@
 
 *{
     box-sizing: border-box;
-    font-size: large;
-    font-weight: bolder;
+    font-size:x-large;
+    font-weight:300;
     font-family:button ;
     color:blueviolet;
     text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
@@ -32,6 +32,10 @@
     background-color: lightcoral;
     margin-bottom:10px;
     flex: 0 1 auto;
+    padding: 8px;
+    font-size: 40px;
+    justify-content: center;
+    align-items: center;
 }
 
 .inputBody-style{
@@ -50,7 +54,7 @@
     flex-direction: row;
 }
 .button-style{
-    width:70px;
+    width:80px;
     height:45px;
     color:rgb(144, 51, 51);
     background-color: rgb(183, 199, 65);
