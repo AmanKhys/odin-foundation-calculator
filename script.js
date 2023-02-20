@@ -12,14 +12,14 @@ const screen = document.createElement('div');
 screen.classList.add("screen-style");
 const inputBody = document.createElement('div');
 inputBody.classList.add("inputBody-style");
-
 document.body.appendChild(container);
 container.appendChild(screen);
 container.appendChild(inputBody);
+
 const operators = ['+','-','*','/','=','clear'];
 const operatorsCopy = [...operators];
 
-//CREATE BUTTONS FOR INPUT  
+//CREATE BUTTONS and event listening
  for(let i=0; i<4; i++){
     const buttonRow = document.createElement('div');
     buttonRow.classList.add('button-row-style');
@@ -47,6 +47,7 @@ const operatorsCopy = [...operators];
     inputBody.appendChild(buttonRow);
  }
 
+//update screen on event
 let text = ""
 let prev_value = "";
 let op_counter = 0;
@@ -61,7 +62,7 @@ function updateScreen(e){
 
     
     screen.innerText += value;
-    text = screen.innerText; //one character less than actual innerText since it is updated later
+    text = screen.innerText; 
     let textArr = text.split('');
     
     
@@ -72,13 +73,18 @@ function updateScreen(e){
     console.table({ value,prev_value, op_counter, text});
     
     operatorsCopy.forEach((op,index)=>{
-        if(op == value && value == prev_value) op_counter++;
+        if(op == value){
+            operatorsCopy.forEach((op2,i)=>{
+                if(op2 == prev_value) op_counter++;
+            })
+        }
     })
 
 
     // //
-    if(op_counter>0){
-        text = text.slice(0,-1);
+    while(op_counter>0){
+        text = text.slice(0,-2);
+        text += value;
         console.log(`new text ${text}`)
         screen.innerText = text;
         op_counter--;
