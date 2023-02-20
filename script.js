@@ -5,7 +5,7 @@ function divide(a,b){
     if(b=0) return;
     return a/b;
 }
-
+//construct the body//
 const container = document.createElement('div');
 container.classList.add("container-style");
 const screen = document.createElement('div');
@@ -17,6 +17,9 @@ document.body.appendChild(container);
 container.appendChild(screen);
 container.appendChild(inputBody);
 const operators = ['+','-','*','/','=','clear'];
+const operatorsCopy = [...operators];
+
+//CREATE BUTTONS FOR INPUT  
  for(let i=0; i<4; i++){
     const buttonRow = document.createElement('div');
     buttonRow.classList.add('button-row-style');
@@ -43,41 +46,54 @@ const operators = ['+','-','*','/','=','clear'];
     }
     inputBody.appendChild(buttonRow);
  }
-//DONE.. make buttons for inputs 
-// - js and plain html...as comfortable to write
+
+let text = ""
 let prev_value = "";
 let op_counter = 0;
+let nums = []
 function updateScreen(e){
     const button = e.target;
     let value = button.id;
-    if(value == "clear") screen.innerText = "";
-    let text = screen.innerText; //one character less than actual innerText since it is updated later
-    const valueLength = value.length;
-    const textLength = text.length;
-    prev_value = text.slice(-1);
-    // console.log(`prev value is ${prev_value}`)
-    // console.log(`text is ${text}`)
-    // console.log(` value is ${value}`);
-    // console.log(`opC is ${op_counter}`)
-    console.table({value: value,prev_value: prev_value, opC : op_counter, text: text})
-    if(value != "clear") 
-        screen.innerText += `${value}`;
+    if(value == "clear"){
+        screen.innerText = '';
+        return;
+    }
+
+    
+    screen.innerText += value;
+    text = screen.innerText; //one character less than actual innerText since it is updated later
+    let textArr = text.split('');
+    
+    
+    
+    
+    
+    prev_value = textArr[textArr.length - 2];
+    console.table({ value,prev_value, op_counter, text});
+    
+    operatorsCopy.forEach((op,index)=>{
+        if(op == value && value == prev_value) op_counter++;
+    })
+
+
+    // //
     if(op_counter>0){
-        const newText = text.slice(0,-1);
-        console.log(`new text ${newText}`)
-        screen.innerText = newText;
+        text = text.slice(0,-1);
+        console.log(`new text ${text}`)
+        screen.innerText = text;
         op_counter--;
     }
-    for(op in operators){
-        if(prev_value == op && prev_value == value){
-            op_counter++;
-        }
-    }
-    prev_value = value;
-    console.table({agin_pv : prev_value, again_text : text})
+
+    // prev_value = value;
+    // console.table({agin_pv : prev_value, again_text : text})
 
 }
-// use eventlisteners and read values
+//DONE.. make buttons for inputs 
+// - js and plain html...as comfortable to write
+
+
+//DONE... use eventlisteners and read values
+
 // pass it to functions and update on screen
 // store the result in some variable
 // make sure the presidencies of math are followed
