@@ -54,15 +54,16 @@ function updateScreen(e){
     let text = screen.innerText; //one character less than actual innerText since it is updated later
     const valueLength = value.length;
     const textLength = text.length;
-    prev_value = text.slice(textLength-3,2);
-    console.log(`prev value is ${prev_value}`)
-    console.log(`text is ${text}`)
-    console.log(` value is ${value}`);
-    console.log(`opC is ${op_counter}`)
+    prev_value = text.slice(-1);
+    // console.log(`prev value is ${prev_value}`)
+    // console.log(`text is ${text}`)
+    // console.log(` value is ${value}`);
+    // console.log(`opC is ${op_counter}`)
+    console.table({value: value,prev_value: prev_value, opC : op_counter, text: text})
     if(value != "clear") 
         screen.innerText += `${value}`;
     if(op_counter>0){
-        const newText = text.slice(0,(textLength - valueLength - 1));
+        const newText = text.slice(0,-1);
         console.log(`new text ${newText}`)
         screen.innerText = newText;
         op_counter--;
@@ -73,7 +74,7 @@ function updateScreen(e){
         }
     }
     prev_value = value;
-    console.log(`prev value is ${prev_value}`)
+    console.table({agin_pv : prev_value, again_text : text})
 
 }
 // use eventlisteners and read values
