@@ -5,6 +5,8 @@ function divide(a,b){
     if(b=0) return;
     return a/b;
 }
+import { returnNumAndOp } from "./updateScreen";
+
 //construct the body//
 const container = document.createElement('div');
 container.classList.add("container-style");
@@ -93,6 +95,12 @@ function updateScreen(e){
     // prev_value = value;
     // console.table({agin_pv : prev_value, again_text : text})
 
+    //return numbers and operators array from text string
+    const obj = {numbers, ops};
+    obj = returnNumAndOp(text,operatorsCopy);
+    console.log(`serious serious results...huff`);
+    console.log(obj);
+    
 }
 //DONE.. make buttons for inputs 
 // - js and plain html...as comfortable to write
