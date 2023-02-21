@@ -1,21 +1,28 @@
-let text = "sfsf23242353ti5232";
+let text = "22s345353f239482984i545888t999";
 let ops = ['s','f','t','i'];
-let nums = Array(100).fill(0);//=
-let numbers =[];
+let numbers =Array(20).fill(0);//=
 let ops2 = [];
 let j = 0;
 let textArr = text.split('');//=
-for(let i = 0;i<textArr.length-1;i++){
+let prev_value = 0;//=
+let l = textArr.length;//=
+console.log({text,l,ops})
+for(let i = 0;i<l;i++){
+    
     if(!ops.includes(textArr[i])){
-        let prev_value = Number(nums[j]);//=
         let value = Number(textArr[i]);//=
         prev_value = prev_value*10 + value; //=
-        numbers[j] = prev_value;//=
-
     }else{
-        ops2[j] = textArr[i]; 
+        ops2[j] = textArr[i]; //=
+        numbers[j] = prev_value;
+        prev_value = 0;
+        ops2;
         j++;
+    }
+    if(i == l-1){
+        numbers[j] = prev_value;
+        prev_value = 0;
     }
 };
 
-console.log({nums,ops2}); 
+console.log({numbers,ops2}); 
