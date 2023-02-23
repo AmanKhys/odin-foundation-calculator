@@ -75,51 +75,42 @@ return {numbersOkkeAane,ops2Aane};
 
 
 //function for evaluating num and ops array into valid math expression
+
 function getAnswer(numbers,ops2){
     let answer = 0;
     let len = numbers.length;
     for(let i = 0;i<len;i++){
-        let skipper = false;
         ops2.forEach((val,index) => {
             if(val == '/'){
                 if(numbers[index+1] == 0) return '.....math error .....';
                 numbers[index] /=numbers[index+1]; 
                 numbers.splice(index+1,1);
                 const lookOp = ops2.splice(index,1);//=
-                console.log(`now doing ${lookOp} operation and left with ${numbers }`);
+                console.log(`now doing ${lookOp} operation at ${index} and left with ${numbers }`);
                 numbers;
                 ops2;
-                skipper = true;
             }
             else if(val == '*'){
                 (numbers[index]*=numbers[index+1]);
                 numbers.splice(index+1,1);
                 const lookOp = ops2.splice(index,1);
-                console.log(`now doing ${lookOp} operation and left with ${numbers }`);
+                console.log(`now doing ${lookOp} operation at ${index} and left with ${numbers }`);
                 numbers;
                 ops2;//=
-                skipper = true; //
             }
-            
-        });
-
-        if(skipper == true) 
-            continue;
-
-        ops2.forEach((val,index)=>{
-            if(val == '+'){
+            else if(val == '+' && !ops2.includes('/') && !ops2.includes('*')){
                 numbers[index]+=numbers[index+1];
                 numbers.splice(index+1,1);
                 const lookOp = ops2.splice(index,1); 
-                console.log(`now doing ${lookOp} operation and left with ${numbers }`);
+                console.log(`now doing ${lookOp} operation at ${index} and left with ${numbers }`);
                 numbers;
                 ops2;
 
-            }else if(val == '-'){
+            }else if(val == '-' && !ops2.includes('/') && !ops2.includes('*')){
                 numbers[index]-=numbers[index+1];
                 numbers.splice(index+1,1);
                 const lookOp = ops2.splice(index,1); 
-                console.log(`now doing ${lookOp} operation and left with ${numbers }`);
+                console.log(`now doing ${lookOp} operation at ${index} and left with ${numbers }`);
                 numbers;
                 ops2;
             };
