@@ -1,11 +1,3 @@
-function add (a,b){ return a+b;};
-function subtract(a,b){return a-b};
-function multiply(a,b){return a*b};
-function divide(a,b){
-    if(b=0) return;
-    return a/b;
-}
-import { returnNumAndOp } from "./updateScreen";
 
 //construct the body//
 const container = document.createElement('div');
@@ -48,6 +40,43 @@ const operatorsCopy = [...operators];
     }
     inputBody.appendChild(buttonRow);
  }
+//string giving fucntion
+
+function returnNumsAndOps(text,ops){
+let numbers =[];//=
+let ops2 = [];
+let j = 0;
+let textArr = text.split('');//=
+let prev_value = 0;//=
+let l = textArr.length;//=
+console.log({text,l,ops})
+for(let i = 0;i<l;i++){
+    
+    if(!ops.includes(textArr[i])){
+        let value = Number(textArr[i]);//=
+        prev_value = prev_value*10 + value; //=
+    }else{
+        ops2[j] = textArr[i]; //=
+        numbers[j] = prev_value;
+        prev_value = 0;
+        ops2;
+        j++;
+    }
+    if(i == l-1){
+        numbers[j] = prev_value;
+        prev_value = 0;
+    }
+};
+
+// console.log({numbers,ops2});
+return {numbers,ops2};
+}  
+
+
+//function for evaluating num and ops array into valid math expression
+function toMath(numbers,ops2){
+
+}
 
 //update screen on event
 let text = ""
@@ -61,7 +90,11 @@ function updateScreen(e){
         screen.innerText = '';
         return;
     }
-
+    if(value == '='){
+        const numAndOps = returnNumsAndOps(text,operatorsCopy);
+        value = '';
+        console.log(numAndOps);
+    }
     
     screen.innerText += value;
     text = screen.innerText; 
@@ -81,6 +114,7 @@ function updateScreen(e){
             })
         }
     })
+    
 
 
     // //
@@ -96,10 +130,8 @@ function updateScreen(e){
     // console.table({agin_pv : prev_value, again_text : text})
 
     //return numbers and operators array from text string
-    const obj = {numbers, ops};
-    obj = returnNumAndOp(text,operatorsCopy);
-    console.log(`serious serious results...huff`);
-    console.log(obj);
+    console.log("........end of updateScreen....................................");
+
     
 }
 //DONE.. make buttons for inputs 
