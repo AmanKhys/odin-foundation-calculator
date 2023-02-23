@@ -43,8 +43,8 @@ const operatorsCopy = [...operators];
 //string giving fucntion
 
 function returnNumsAndOps(text,ops){
-let numbers =[];//=
-let ops2 = [];
+let numbersOkkeAane =[];//=
+let ops2Aane = [];
 let j = 0;
 let textArr = text.split('');//=
 let prev_value = 0;//=
@@ -56,26 +56,80 @@ for(let i = 0;i<l;i++){
         let value = Number(textArr[i]);//=
         prev_value = prev_value*10 + value; //=
     }else{
-        ops2[j] = textArr[i]; //=
-        numbers[j] = prev_value;
+        ops2Aane[j] = textArr[i]; //=
+        numbersOkkeAane[j] = prev_value;
         prev_value = 0;
-        ops2;
+        ops2Aane;
         j++;
     }
     if(i == l-1){
-        numbers[j] = prev_value;
+        numbersOkkeAane[j] = prev_value;
         prev_value = 0;
     }
 };
 
-// console.log({numbers,ops2});
-return {numbers,ops2};
+// console.log({numbersOkkeAane,ops2Aane});
+return {numbersOkkeAane,ops2Aane};
 }  
 
 
-//function for evaluating num and ops array into valid math expression
-function toMath(numbers,ops2){
 
+//function for evaluating num and ops array into valid math expression
+function getAnswer(numbers,ops2){
+    let answer = 0;
+    let len = numbers.length;
+    for(let i = 0;i<len;i++){
+        let skipper = false;
+        ops2.forEach((val,index) => {
+            if(val == '/'){
+                if(numbers[index+1] == 0) return '.....math error .....';
+                numbers[index] /=numbers[index+1]; 
+                numbers.splice(index+1,1);
+                const lookOp = ops2.splice(index,1);//=
+                console.log(`now doing ${lookOp} operation and left with ${numbers }`);
+                numbers;
+                ops2;
+                skipper = true;
+            }
+            else if(val == '*'){
+                (numbers[index]*=numbers[index+1]);
+                numbers.splice(index+1,1);
+                const lookOp = ops2.splice(index,1);
+                console.log(`now doing ${lookOp} operation and left with ${numbers }`);
+                numbers;
+                ops2;//=
+                skipper = true; //
+            }
+            
+        });
+
+        if(skipper == true) 
+            continue;
+
+        ops2.forEach((val,index)=>{
+            if(val == '+'){
+                numbers[index]+=numbers[index+1];
+                numbers.splice(index+1,1);
+                const lookOp = ops2.splice(index,1); 
+                console.log(`now doing ${lookOp} operation and left with ${numbers }`);
+                numbers;
+                ops2;
+
+            }else if(val == '-'){
+                numbers[index]-=numbers[index+1];
+                numbers.splice(index+1,1);
+                const lookOp = ops2.splice(index,1); 
+                console.log(`now doing ${lookOp} operation and left with ${numbers }`);
+                numbers;
+                ops2;
+            };
+
+        })
+        numbers
+        if(numbers.length == 1) answer = numbers[0];
+        
+    };
+    return answer;
 }
 
 //update screen on event
@@ -93,7 +147,8 @@ function updateScreen(e){
     if(value == '='){
         const numAndOps = returnNumsAndOps(text,operatorsCopy);
         value = '';
-        console.log(numAndOps);
+        const answer = getAnswer(numAndOps.numbersOkkeAane,numAndOps.ops2Aane);
+        console.log(`.......ANSWER...ASNWER ${answer}`)
     }
     
     screen.innerText += value;
