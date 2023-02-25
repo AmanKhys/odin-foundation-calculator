@@ -99,10 +99,10 @@ return numbers[0];
 }
 
 
-
+const answer = getAnswer(numbers,ops2);
 
 
 
 console.log('.......ANSWER.......');
-console.log(getAnswer(numbers,ops2));
+console.log(answer);
 console.log('.......ANSWER.......');

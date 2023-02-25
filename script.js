@@ -128,8 +128,11 @@ function updateScreen(e){
     if(value == '='){
         const numAndOps = returnNumsAndOps(text,operatorsCopy);
         value = '';
-        const answer = getAnswer(numAndOps.numbersOkkeAane,numAndOps.ops2Aane);
-        console.log(`.......ANSWER...ASNWER ${answer}`)
+        const answer = `${getAnswer(numAndOps.numbersOkkeAane,numAndOps.ops2Aane)}`;
+        // console.log(`.......ANSWER...ASNWER ${answer}`)
+        screen.innerText = ''
+        screen.innerText+= answer;
+        return;
     }
     
     screen.innerText += value;
